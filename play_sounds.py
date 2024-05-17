@@ -9,10 +9,10 @@ import sys
 import os
 os.environ['SDL_AUDIODRIVER'] = 'dsp'
 
-APPLICATON = "Chromium"
 
 
 PATH = sys.argv[1]
+APPLICATON = sys.argv[2]
 
 year = 2024
 month = 5
@@ -224,7 +224,7 @@ def main(now=None):
 
 
 
-if len(sys.argv) > 2 and sys.argv[2] == "debug":
+if len(sys.argv) > 3 and sys.argv[3] == "debug":
     try:
         # main()
         main(datetime(year, 5, 26, 8, 50))
