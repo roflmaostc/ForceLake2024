@@ -3,67 +3,32 @@
 from datetime import datetime, timedelta
 import time
 import subprocess
-import os
+
+import sys
 
 import os
 os.environ['SDL_AUDIODRIVER'] = 'dsp'
 
 APPLICATON = "Chromium"
 
-def deltat(min):
-    return timedelta(hours=0, minutes=min)
 
-
-def find_index(application="Spotify"):
-    
-    out = str(subprocess.check_output(["pacmd list-sink-inputs"], shell=True))
-    indices = []
-    for line in out.split("\\n"):
-        line = line.strip()
-        
-
-        if line.startswith("index"):
-            index = line.split()[-1] 
-       
-        if application in line:
-            indices.append(index)
-
-    return indices 
-
-
-def play_sound(files):
-    indices = find_index(APPLICATON)
-    for file in files:
-        subprocess.call(["mplayer", file])
-
-
-def mute():
-    indices = find_index(APPLICATON)
-    for index in indices:
-        subprocess.call(["pactl", "set-sink-input-mute", index, "true"])
-
-def unmute():
-    indices = find_index(APPLICATON)
-    for index in indices:
-        subprocess.call(["pactl", "set-sink-input-mute", index, "false"])
-
-PATH = "/home/fxw/Documents/Sport/Ultimate_Frisbee/2024_Force_Lake/ForceLake2024"
+PATH = sys.argv[1]
 
 year = 2024
 month = 5
 saturday = 25
 sunday = 26
 
-slots_saturday = [datetime(2024, 5, saturday, i, 0) for i in range(9, 17)]
+slots_saturday = [datetime(year, month, saturday, i, 0) for i in range(9, 17)]
 teams = ["0_hammer_novas", "1_universe_huckers", "2_nasa_noobs", "3_space_cowboys", "4_overhead_orbiters", "5_layout_alliance", "6_greatest_wookies", "7_moon_patrol", "8_scoober_seekers", "9_vulcan_league"]
 
 
-slots_sunday = [datetime(2024, 5, sunday, 9, 0),
-                datetime(2024, 5, sunday, 10, 0),
-                datetime(2024, 5, sunday, 11, 15),
-                datetime(2024, 5, sunday, 12, 15),
-                datetime(2024, 5, sunday, 13, 45),
-                datetime(2024, 5, sunday, 14, 45)]
+slots_sunday = [datetime(year, month, sunday, 9, 0),
+                datetime(year, month, sunday, 10, 0),
+                datetime(year, month, sunday, 11, 15),
+                datetime(year, month, sunday, 12, 15),
+                datetime(year, month, sunday, 13, 45),
+                datetime(year, month, sunday, 14, 45)]
 
 matches_sunday = [
     [None, None, 2, 6, 4, 8],
@@ -117,6 +82,42 @@ matches_saturday = [
 ]
 
 
+def deltat(min):
+    return timedelta(hours=0, minutes=min)
+
+
+def find_index(application="Spotify"):
+    
+    out = str(subprocess.check_output(["pacmd list-sink-inputs"], shell=True))
+    indices = []
+    for line in out.split("\\n"):
+        line = line.strip()
+        
+
+        if line.startswith("index"):
+            index = line.split()[-1] 
+       
+        if application in line:
+            indices.append(index)
+
+    return indices 
+
+
+def play_sound(files):
+    indices = find_index(APPLICATON)
+    for file in files:
+        subprocess.call(["mplayer", file])
+
+
+def mute():
+    indices = find_index(APPLICATON)
+    for index in indices:
+        subprocess.call(["pactl", "set-sink-input-mute", index, "true"])
+
+def unmute():
+    indices = find_index(APPLICATON)
+    for index in indices:
+        subprocess.call(["pactl", "set-sink-input-mute", index, "false"])
 
 
 def find_slot(slots, time_to_find):
@@ -125,14 +126,6 @@ def find_slot(slots, time_to_find):
             return i
 
     return None
-
-# 10min before the match
-# announce teams
-# 5min before the match 
-# 0min matches start
-# 22min after the start, halftime
-# 40min after start, matches almost over
-# 45min after start, matches over
 
 
 def main(now=None):
@@ -146,9 +139,11 @@ def main(now=None):
     elif now.day == 26:
         matches = matches_sunday
         slots = slots_sunday
+    else:
+        return
 
 
-        # announce teams
+    # announce teams
     slot = find_slot(slots, now + deltat(10))
     if slot is not None:
         mute()
@@ -178,6 +173,9 @@ def main(now=None):
                         os.path.join(PATH, "files/Team-field-announcements/" + team2 + ".m4a.mp3")])
 
         unmute()
+        return 0
+
+
     # 5min before the match
     slot = find_slot(slots, now + deltat(5))
     if slot is not None:
@@ -185,7 +183,7 @@ def main(now=None):
         print("Matches start in 5min")
         play_sound([os.path.join(PATH, "files/MatchsStartIn5_en.mp3")])
         unmute()
-
+        return 0
     # 0min matches start
     slot = find_slot(slots, now)
     if slot is not None:
@@ -193,7 +191,7 @@ def main(now=None):
         print("Matches start now")
         play_sound([os.path.join(PATH, "files/MatchsStart.mp3")])
         unmute()
-
+        return 0
 
     # 22min after the start, halftime
     slot = find_slot(slots, now - deltat(22))
@@ -202,7 +200,7 @@ def main(now=None):
         print("Halftime")
         play_sound([os.path.join(PATH, "files/halftime.mp3")])
         unmute()
-
+        return 0
     # 40min after the start, end of the match
     slot = find_slot(slots, now - deltat(40))
     if slot is not None:
@@ -210,7 +208,7 @@ def main(now=None):
         print("Matches almost over")
         play_sound([os.path.join(PATH, "files/MatchsEndIn5.mp3")])
         unmute()
-
+        return 0
     # 45min after the start, end of the match
     slot = find_slot(slots, now - deltat(45))
     if slot is not None:
@@ -219,20 +217,28 @@ def main(now=None):
         play_sound([os.path.join(PATH, "files/MatchsEnd_with_gameover.mp3")])
 
         unmute()
-       
+        return 0
 
 
     return
 
 
-try:
-    # main(datetime(2024, 5, 26, 8, 50))
-    # main(datetime(2024, 5, 26, 9, 50))
-    # main(datetime(2024, 5, 25, 8, 50))
-    #main(datetime(2024, 5, 25, 8, 55))
-    main(datetime(2024, 5, 25, 9, 0))
-    #main(datetime(2024, 5, 25, 9, 22))
-    #main(datetime(2024, 5, 25, 9, 40))
-    #main(datetime(2024, 5, 25, 9, 45))
-except KeyboardInterrupt:
+
+if len(sys.argv) > 2 and sys.argv[2] == "debug":
+    try:
+        # main()
+        main(datetime(year, 5, 26, 8, 50))
+        # main(datetime(year, 5, 26, 9, 50))
+        # main(datetime(year, 5, 25, 8, 50))
+        #main(datetime(year, 5, 25, 8, 55))
+        # main(datetime(year, 5, 25, 9, 0))
+        #main(datetime(year, 5, 25, 9, 22))
+        #main(datetime(year, 5, 25, 9, 40))
+        #main(datetime(year, 5, 25, 9, 45))
+    except KeyboardInterrupt:
+        unmute()
+
+else:
+    main()
     unmute()
+
