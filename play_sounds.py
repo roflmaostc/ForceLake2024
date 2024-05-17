@@ -55,6 +55,20 @@ saturday = 25
 sunday = 26
 
 slots_saturday = [datetime(2024, 5, saturday, i, 0) for i in range(9, 17)]
+teams = ["0_hammer_novas", "1_universe_huckers", "2_nasa_noobs", "3_space_cowboys", "4_overhead_orbiters", "5_layout_alliance", "6_greatest_wookies", "7_moon_patrol", "8_scoober_seekers", "9_vulcan_league"]
+
+
+slots_sunday = [datetime(2024, 5, sunday, 9, 0),
+                datetime(2024, 5, sunday, 10, 0),
+                datetime(2024, 5, sunday, 11, 15),
+                datetime(2024, 5, sunday, 12, 15),
+                datetime(2024, 5, sunday, 13, 45),
+                datetime(2024, 5, sunday, 14, 45)]
+
+matches_sunday = [
+    [None, None, 2, 6, 4, 8],
+    [1, 7, 0, 5, 3, 9]
+]
 
 
 # 0 Hammer Novas
@@ -68,7 +82,6 @@ slots_saturday = [datetime(2024, 5, saturday, i, 0) for i in range(9, 17)]
 # 8 Scoober Seekers
 # 9 Vulcan League
 
-teams = ["0_hammer_novas", "1_universe_huckers", "2_nasa_noobs", "3_space_cowboys", "4_overhead_orbiters", "5_layout_alliance", "6_greatest_wookies", "7_moon_patrol", "8_scoober_seekers", "9_vulcan_league"]
 
 # HAMMER NOVAS vs UNIVERSE HUCKERS	    NASA NOOBS vs	SPACE COWBOYS	    OVERHEAD ORBITERS vs LAYOUT ALLIANCE
 # GREATEST WOOKIES vs MOON PATROL       SCOOBER SEEKERS vs VULCAN LEAGUE    WARM - UP
@@ -103,6 +116,9 @@ matches_saturday = [
     [7, 4, 8, 6, 9, 0],
 ]
 
+
+
+
 def find_slot(slots, time_to_find):
     for i in range(len(slots)):
         if slots[i] == time_to_find:
@@ -125,88 +141,98 @@ def main(now=None):
     
     # Saturday    
     if now.day == 25:
+        matches = matches_saturday
+        slots = slots_saturday
+    elif now.day == 26:
+        matches = matches_sunday
+        slots = slots_sunday
+
+
         # announce teams
-        slot = find_slot(slots_saturday, now + deltat(10))
-        if slot is not None:
-            mute()
-            if matches_saturday[slot][0] is not None:
-                team1 = teams[matches_saturday[slot][0]]
-                team2 = teams[matches_saturday[slot][1]]
-                print("Match : ", team1, " vs ", team2)
-                play_sound([os.path.join(PATH, "files/Team-field-announcements/field_1.m4a.mp3"),
-                            os.path.join(PATH, "files/Team-field-announcements/" + team1 + ".m4a.mp3"),
-                            os.path.join(PATH, "files/Team-field-announcements/versus.m4a.mp3"),
-                            os.path.join(PATH, "files/Team-field-announcements/" + team2 + ".m4a.mp3")])
-            if matches_saturday[slot][2] is not None:
-                team1 = teams[matches_saturday[slot][2]]
-                team2 = teams[matches_saturday[slot][3]]
-                print("Match : ", team1, " vs ", team2)
-                play_sound([os.path.join(PATH, "files/Team-field-announcements/field_2.m4a.mp3"),
-                            os.path.join(PATH, "files/Team-field-announcements/" + team1 + ".m4a.mp3"),
-                            os.path.join(PATH, "files/Team-field-announcements/versus.m4a.mp3"),
-                            os.path.join(PATH, "files/Team-field-announcements/" + team2 + ".m4a.mp3")])
-            if matches_saturday[slot][4] is not None:
-                team1 = teams[matches_saturday[slot][4]]
-                team2 = teams[matches_saturday[slot][5]]
-                print("Match : ", team1, " vs ", team2)
-                play_sound([os.path.join(PATH, "files/Team-field-announcements/field_3.m4a.mp3"),
-                            os.path.join(PATH, "files/Team-field-announcements/" + team1 + ".m4a.mp3"),
-                            os.path.join(PATH, "files/Team-field-announcements/versus.m4a.mp3"),
-                            os.path.join(PATH, "files/Team-field-announcements/" + team2 + ".m4a.mp3")])
+    slot = find_slot(slots, now + deltat(10))
+    if slot is not None:
+        mute()
+        if matches[slot][0] is not None:
+            team1 = teams[matches[slot][0]]
+            team2 = teams[matches[slot][1]]
+            print("Match : ", team1, " vs ", team2)
+            play_sound([os.path.join(PATH, "files/Team-field-announcements/field_1.m4a.mp3"),
+                        os.path.join(PATH, "files/Team-field-announcements/" + team1 + ".m4a.mp3"),
+                        os.path.join(PATH, "files/Team-field-announcements/versus.m4a.mp3"),
+                        os.path.join(PATH, "files/Team-field-announcements/" + team2 + ".m4a.mp3")])
+        if matches[slot][2] is not None:
+            team1 = teams[matches[slot][2]]
+            team2 = teams[matches[slot][3]]
+            print("Match : ", team1, " vs ", team2)
+            play_sound([os.path.join(PATH, "files/Team-field-announcements/field_2.m4a.mp3"),
+                        os.path.join(PATH, "files/Team-field-announcements/" + team1 + ".m4a.mp3"),
+                        os.path.join(PATH, "files/Team-field-announcements/versus.m4a.mp3"),
+                        os.path.join(PATH, "files/Team-field-announcements/" + team2 + ".m4a.mp3")])
+        if matches[slot][4] is not None:
+            team1 = teams[matches[slot][4]]
+            team2 = teams[matches[slot][5]]
+            print("Match : ", team1, " vs ", team2)
+            play_sound([os.path.join(PATH, "files/Team-field-announcements/field_3.m4a.mp3"),
+                        os.path.join(PATH, "files/Team-field-announcements/" + team1 + ".m4a.mp3"),
+                        os.path.join(PATH, "files/Team-field-announcements/versus.m4a.mp3"),
+                        os.path.join(PATH, "files/Team-field-announcements/" + team2 + ".m4a.mp3")])
 
-            unmute()
-        # 5min before the match
-        slot = find_slot(slots_saturday, now + deltat(5))
-        if slot is not None:
-            mute()
-            print("Matches start in 5min")
-            play_sound([os.path.join(PATH, "files/MatchsStartIn5_en.mp3")])
-            unmute()
+        unmute()
+    # 5min before the match
+    slot = find_slot(slots, now + deltat(5))
+    if slot is not None:
+        mute()
+        print("Matches start in 5min")
+        play_sound([os.path.join(PATH, "files/MatchsStartIn5_en.mp3")])
+        unmute()
 
-        # 0min matches start
-        slot = find_slot(slots_saturday, now)
-        if slot is not None:
-            mute()
-            print("Matches start now")
-            play_sound([os.path.join(PATH, "files/MatchsStart.mp3")])
-            unmute()
+    # 0min matches start
+    slot = find_slot(slots, now)
+    if slot is not None:
+        mute()
+        print("Matches start now")
+        play_sound([os.path.join(PATH, "files/MatchsStart.mp3")])
+        unmute()
 
 
-        # 22min after the start, halftime
-        slot = find_slot(slots_saturday, now - deltat(22))
-        if slot is not None:
-            mute()
-            print("Halftime")
-            play_sound([os.path.join(PATH, "files/halftime.mp3")])
-            unmute()
+    # 22min after the start, halftime
+    slot = find_slot(slots, now - deltat(22))
+    if slot is not None:
+        mute()
+        print("Halftime")
+        play_sound([os.path.join(PATH, "files/halftime.mp3")])
+        unmute()
 
-        # 40min after the start, end of the match
-        slot = find_slot(slots_saturday, now - deltat(40))
-        if slot is not None:
-            mute()
-            print("Matches almost over")
-            play_sound([os.path.join(PATH, "files/MatchsEndIn5.mp3")])
-            unmute()
+    # 40min after the start, end of the match
+    slot = find_slot(slots, now - deltat(40))
+    if slot is not None:
+        mute()
+        print("Matches almost over")
+        play_sound([os.path.join(PATH, "files/MatchsEndIn5.mp3")])
+        unmute()
 
-        # 45min after the start, end of the match
-        slot = find_slot(slots_saturday, now - deltat(45))
-        if slot is not None:
-            mute()
-            print("Matches over")
-            play_sound([os.path.join(PATH, "files/MatchsEnd_with_gameover.mp3")])
+    # 45min after the start, end of the match
+    slot = find_slot(slots, now - deltat(45))
+    if slot is not None:
+        mute()
+        print("Matches over")
+        play_sound([os.path.join(PATH, "files/MatchsEnd_with_gameover.mp3")])
 
-            unmute()
-    # Sunday
-    now.day == 26
+        unmute()
        
 
 
     return
 
-main(datetime(2024, 5, 25, 8, 50))
-main(datetime(2024, 5, 25, 8, 55))
-main(datetime(2024, 5, 25, 9, 0))
-main(datetime(2024, 5, 25, 9, 22))
-main(datetime(2024, 5, 25, 9, 40))
-main(datetime(2024, 5, 25, 9, 45))
 
+try:
+    # main(datetime(2024, 5, 26, 8, 50))
+    # main(datetime(2024, 5, 26, 9, 50))
+    # main(datetime(2024, 5, 25, 8, 50))
+    #main(datetime(2024, 5, 25, 8, 55))
+    main(datetime(2024, 5, 25, 9, 0))
+    #main(datetime(2024, 5, 25, 9, 22))
+    #main(datetime(2024, 5, 25, 9, 40))
+    #main(datetime(2024, 5, 25, 9, 45))
+except KeyboardInterrupt:
+    unmute()
