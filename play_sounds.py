@@ -184,6 +184,7 @@ def main(now=None):
         play_sound([os.path.join(PATH, "files/MatchsStartIn5_en.mp3")])
         unmute()
         return 0
+    
     # 0min matches start
     slot = find_slot(slots, now)
     if slot is not None:
@@ -201,6 +202,7 @@ def main(now=None):
         play_sound([os.path.join(PATH, "files/halftime.mp3")])
         unmute()
         return 0
+    
     # 40min after the start, end of the match
     slot = find_slot(slots, now - deltat(40))
     if slot is not None:
@@ -209,6 +211,7 @@ def main(now=None):
         play_sound([os.path.join(PATH, "files/MatchsEndIn5.mp3")])
         unmute()
         return 0
+
     # 45min after the start, end of the match
     slot = find_slot(slots, now - deltat(45))
     if slot is not None:
@@ -227,14 +230,14 @@ def main(now=None):
 if len(sys.argv) > 3 and sys.argv[3] == "debug":
     try:
         # main()
-        main(datetime(year, 5, 26, 8, 50))
+        # main(datetime(year, 5, 26, 8, 50))
         # main(datetime(year, 5, 26, 9, 50))
         # main(datetime(year, 5, 25, 8, 50))
-        #main(datetime(year, 5, 25, 8, 55))
-        # main(datetime(year, 5, 25, 9, 0))
-        #main(datetime(year, 5, 25, 9, 22))
-        #main(datetime(year, 5, 25, 9, 40))
-        #main(datetime(year, 5, 25, 9, 45))
+        main(datetime(year, 5, 25, 8, 55))
+        main(datetime(year, 5, 25, 9, 0))
+        main(datetime(year, 5, 25, 9, 22))
+        main(datetime(year, 5, 25, 9, 40))
+        main(datetime(year, 5, 25, 9, 45))
     except KeyboardInterrupt:
         unmute()
 
