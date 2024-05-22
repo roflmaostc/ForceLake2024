@@ -30,57 +30,51 @@ slots_sunday = [datetime(year, month, sunday, 9, 0),
                 datetime(year, month, sunday, 13, 45),
                 datetime(year, month, sunday, 14, 45)]
 
-matches_sunday = [
-    [None, None, 2, 6, 4, 8],
-    [1, 7, 0, 5, 3, 9]
-]
+
+# matches_saturday = [
+#     [0, 1, 2, 3, 4, 5],
+#     [6, 7, 8, 9, None, None],
+#     [4, 2, 0, 3, 1, 5],
+#     [6, 9, None, None, 8, 7],
+#     [None, None, 3, 5, 1, 2],
+#     [6, 4, 8, 0, 7, 9],
+#     [5, 2, None, None, 1, 3],
+    # [7, 4, 8, 6, 9, 0],
+# ]
 
 
-# 0 Hammer Novas
-# 1 Universe Huckers
-# 2 NASA Noobs
-# 3 Space Cowboys
-# 4 Overhead Orbiters
-# 5 Layout Alliance
-# 6 Greatest Wookies
-# 7 Moon Patrol
-# 8 Scoober Seekers
-# 9 Vulcan League
 
 
-# HAMMER NOVAS vs UNIVERSE HUCKERS	    NASA NOOBS vs	SPACE COWBOYS	    OVERHEAD ORBITERS vs LAYOUT ALLIANCE
-# GREATEST WOOKIES vs MOON PATROL       SCOOBER SEEKERS vs VULCAN LEAGUE    WARM - UP
-# OVERHEAD ORBITERS	vs NASA NOOBS	    HAMMER NOVAS vs SPACE COWBOYS	    UNIVERSE HUCKERS vsLAYOUT ALLIANCE
-# GREATEST WOOKIES vs VULCAN LEAGUE	    WARM - UP		                    SCOOBER SEEKERS	vs MOON PATROL
-# WARM - UP		                        SPACE COWBOYS vs LAYOUT ALLIANCE    UNIVERSE HUCKERS vs NASA NOOBS
-# GREATEST WOOKIES vs OVERHEAD ORBITERS	SCOOBER SEEKERS	vs HAMMER NOVAS	    MOON PATROL	vs VULCAN LEAGUE
-# LAYOUT ALLIANCE vs NASA NOOBS	        WARM - UP		                    UNIVERSE HUCKERS vs SPACE COWBOYS
-# MOON PATROL vs OVERHEAD ORBITERS	    SCOOBER SEEKERS	vs GREATEST WOOKIES	VULCAN LEAGUE vs HAMMER NOVAS
+# make a schedule like this with numbers, but just with the team names as string, if there is "Warm - Up" just insert two times None
+# matches_satur
+# HAMMER NOVAS	UNIVERSE HUCKERS	 NASA NOOBS	SPACE COWBOYS	OVERHEAD ORBITERS	LAYOUT ALLIANCE
+# GREATEST WOOKIES	MOON PATROL	SCOOBER SEEKERS	VULCAN LEAGUE	WARM - UP	
+# OVERHEAD ORBITERS	 NASA NOOBS	HAMMER NOVAS	SPACE COWBOYS	UNIVERSE HUCKERS	LAYOUT ALLIANCE
+# GREATEST WOOKIES	VULCAN LEAGUE	WARM - UP		SCOOBER SEEKERS	MOON PATROL
+# WARM - UP		SPACE COWBOYS	LAYOUT ALLIANCE	UNIVERSE HUCKERS	 NASA NOOBS
+# GREATEST WOOKIES	OVERHEAD ORBITERS	SCOOBER SEEKERS	HAMMER NOVAS	MOON PATROL	VULCAN LEAGUE
+# LAYOUT ALLIANCE	 NASA NOOBS	WARM - UP		UNIVERSE HUCKERS	SPACE COWBOYS
+# MOON PATROL	OVERHEAD ORBITERS	SCOOBER SEEKERS	GREATEST WOOKIES	VULCAN LEAGUE	HAMMER NOVAS
 
-
-# insert numbers in front of the names
-# 1 HAMMER NOVAS vs 2 UNIVERSE HUCKERS	        3 NASA NOOBS vs	4 SPACE COWBOYS	            5 OVERHEAD ORBITERS vs 6 LAYOUT ALLIANCE
-# 7 GREATEST WOOKIES vs 8 MOON PATROL           9 SCOOBER SEEKERS vs 10 VULCAN LEAGUE       WARM - UP
-# 5 OVERHEAD ORBITERS	vs 3 NASA NOOBS	        1 HAMMER NOVAS vs 4 SPACE COWBOYS	        2 UNIVERSE HUCKERS vs 6 LAYOUT ALLIANCE
-# 7 GREATEST WOOKIES vs 10 VULCAN LEAGUE	    WARM - UP		                            9 SCOOBER SEEKERS	vs 8 MOON PATROL
-# WARM - UP		                                4 SPACE COWBOYS vs 6 LAYOUT ALLIANCE        2 UNIVERSE HUCKERS vs 3 NASA NOOBS
-# 7 GREATEST WOOKIES vs 5 OVERHEAD ORBITERS 	9 SCOOBER SEEKERS	vs 1 HAMMER NOVAS	    8 MOON PATROL	vs 10 VULCAN LEAGUE
-# 6 LAYOUT ALLIANCE vs 3 NASA NOOBS	            WARM - UP		                            2 UNIVERSE HUCKERS vs 4 SPACE COWBOYS
-# 8 MOON PATROL vs 5 OVERHEAD ORBITERS	        9 SCOOBER SEEKERS	vs 7 GREATEST WOOKIES	10 VULCAN LEAGUE vs 1 HAMMER NOVAS
-
-# if there is "WARM - UP", do "None, None"
-
+# matches_sunday
 matches_saturday = [
-    [0, 1, 2, 3, 4, 5],
-    [6, 7, 8, 9, None, None],
-    [4, 2, 0, 3, 1, 5],
-    [6, 9, None, None, 8, 7],
-    [None, None, 3, 5, 1, 2],
-    [6, 4, 8, 0, 7, 9],
-    [5, 2, None, None, 1, 3],
-    [7, 4, 8, 6, 9, 0],
+    ["HAMMER_NOVAS", "UNIVERSE_HUCKERS", "NASA_NOOBS", "SPACE_COWBOYS", "OVERHEAD_ORBITERS", "LAYOUT_ALLIANCE"],
+    ["GREATEST_WOOKIES", "MOON_PATROL", "SCOOBER_SEEKERS", "VULCAN_LEAGUE", None, None],
+    ["OVERHEAD_ORBITERS", "NASA_NOOBS", "HAMMER_NOVAS", "SPACE_COWBOYS", "UNIVERSE_HUCKERS", "LAYOUT_ALLIANCE"],
+    ["GREATEST_WOOKIES", "VULCAN_LEAGUE", None, None, "SCOOBER_SEEKERS", "MOON_PATROL"],
+    [None, None, "SPACE_COWBOYS", "LAYOUT_ALLIANCE", "UNIVERSE_HUCKERS", "NASA_NOOBS"],
+    ["GREATEST_WOOKIES", "OVERHEAD_ORBITERS", "SCOOBER_SEEKERS", "HAMMER_NOVAS", "MOON_PATROL", "VULCAN_LEAGUE"],
+    ["LAYOUT_ALLIANCE", "NASA_NOOBS", None, None, "UNIVERSE_HUCKERS", "SPACE_COWBOYS"],
+    ["MOON_PATROL", "OVERHEAD_ORBITERS", "SCOOBER_SEEKERS", "GREATEST_WOOKIES", "VULCAN_LEAGUE", "HAMMER_NOVAS"]
 ]
 
+
+# WARM - UP		 NASA NOOBS	GREATEST WOOKIES	OVERHEAD ORBITERS	SCOOBER SEEKERS
+# UNIVERSE HUCKERS	MOON PATROL	HAMMER NOVAS	LAYOUT ALLIANCE	SPACE COWBOYS	VULCAN LEAGUE
+
+matches_sunday = [[None, None, "NASA_NOOBS", "GREATEST_WOOKIES", "OVERHEAD_ORBITERS", "SCOOBER_SEEKERS"],
+                  ["UNIVERSE_HUCKERS", "MOON_PATROL", "HAMMER_NOVAS", "LAYOUT_ALLIANCE", "SPACE_COWBOYS", "VULCAN_LEAGUE"]
+                  ]
 
 def deltat(min):
     return timedelta(hours=0, minutes=min)
@@ -148,24 +142,24 @@ def main(now=None):
     if slot is not None:
         mute()
         if matches[slot][0] is not None:
-            team1 = teams[matches[slot][0]]
-            team2 = teams[matches[slot][1]]
+            team1 = matches[slot][0].lower()
+            team2 = matches[slot][1].lower()
             print("Match : ", team1, " vs ", team2)
             play_sound([os.path.join(PATH, "files/" + team1 + ".mp3"),
                         os.path.join(PATH, "files/versus.mp3"),
                         os.path.join(PATH, "files/" + team2 + ".mp3"),
                         os.path.join(PATH, "files/field_1.mp3")])
         if matches[slot][2] is not None:
-            team1 = teams[matches[slot][2]]
-            team2 = teams[matches[slot][3]]
+            team1 = matches[slot][2].lower()
+            team2 = matches[slot][3].lower()
             print("Match : ", team1, " vs ", team2)
             play_sound([os.path.join(PATH, "files/" + team1 + ".mp3"),
                         os.path.join(PATH, "files/versus.mp3"),
                         os.path.join(PATH, "files/" + team2 + ".mp3"),
                         os.path.join(PATH, "files/field_2.mp3")])
         if matches[slot][4] is not None:
-            team1 = teams[matches[slot][4]]
-            team2 = teams[matches[slot][5]]
+            team1 = matches[slot][4].lower()
+            team2 = matches[slot][5].lower()
             print("Match : ", team1, " vs ", team2)
             play_sound([os.path.join(PATH, "files/" + team1 + ".mp3"),
                         os.path.join(PATH, "files/versus.mp3"),
@@ -231,8 +225,9 @@ if len(sys.argv) > 3 and sys.argv[3] == "debug":
     try:
         # main()
         main(datetime(year, 5, 26, 8, 50))
-        # main(datetime(year, 5, 26, 9, 50))
-        # main(datetime(year, 5, 25, 8, 50))
+        main(datetime(year, 5, 26, 9, 50))
+        main(datetime(year, 5, 25, 8, 50))
+        main(datetime(year, 5, 25, 9, 50))
         main(datetime(year, 5, 25, 8, 55))
         main(datetime(year, 5, 25, 9, 0))
         main(datetime(year, 5, 25, 9, 22))

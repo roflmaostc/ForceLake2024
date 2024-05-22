@@ -12,6 +12,6 @@ Application name should be something like *Spotify* or *Chromium*. Check with `p
 ## Setting up Cronjob
 Call `crontab -e` and then insert. 
 ```
-* * * * * export XDG_RUNTIME_DIR="/run/user/1000" && export DISPLAY=:0 && /usr/bin/python <PATH>/play_sounds.py <PATH> Chromium
+*/2 * * * * export XDG_RUNTIME_DIR="/run/user/1000" && export DISPLAY=:0 && /usr/bin/python <PATH>/play_sounds.py <PATH> Chromium
 ```
 Be sure that your cronjob is activated `systemctl start cron` and `systemctl enable cron`
