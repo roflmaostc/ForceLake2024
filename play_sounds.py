@@ -151,26 +151,26 @@ def main(now=None):
             team1 = teams[matches[slot][0]]
             team2 = teams[matches[slot][1]]
             print("Match : ", team1, " vs ", team2)
-            play_sound([os.path.join(PATH, "files/Team-field-announcements/field_1.m4a.mp3"),
-                        os.path.join(PATH, "files/Team-field-announcements/" + team1 + ".m4a.mp3"),
-                        os.path.join(PATH, "files/Team-field-announcements/versus.m4a.mp3"),
-                        os.path.join(PATH, "files/Team-field-announcements/" + team2 + ".m4a.mp3")])
+            play_sound([os.path.join(PATH, "files/" + team1 + ".mp3"),
+                        os.path.join(PATH, "files/versus.mp3"),
+                        os.path.join(PATH, "files/" + team2 + ".mp3"),
+                        os.path.join(PATH, "files/field_1.mp3")])
         if matches[slot][2] is not None:
             team1 = teams[matches[slot][2]]
             team2 = teams[matches[slot][3]]
             print("Match : ", team1, " vs ", team2)
-            play_sound([os.path.join(PATH, "files/Team-field-announcements/field_2.m4a.mp3"),
-                        os.path.join(PATH, "files/Team-field-announcements/" + team1 + ".m4a.mp3"),
-                        os.path.join(PATH, "files/Team-field-announcements/versus.m4a.mp3"),
-                        os.path.join(PATH, "files/Team-field-announcements/" + team2 + ".m4a.mp3")])
+            play_sound([os.path.join(PATH, "files/" + team1 + ".mp3"),
+                        os.path.join(PATH, "files/versus.mp3"),
+                        os.path.join(PATH, "files/" + team2 + ".mp3"),
+                        os.path.join(PATH, "files/field_2.mp3")])
         if matches[slot][4] is not None:
             team1 = teams[matches[slot][4]]
             team2 = teams[matches[slot][5]]
             print("Match : ", team1, " vs ", team2)
-            play_sound([os.path.join(PATH, "files/Team-field-announcements/field_3.m4a.mp3"),
-                        os.path.join(PATH, "files/Team-field-announcements/" + team1 + ".m4a.mp3"),
-                        os.path.join(PATH, "files/Team-field-announcements/versus.m4a.mp3"),
-                        os.path.join(PATH, "files/Team-field-announcements/" + team2 + ".m4a.mp3")])
+            play_sound([os.path.join(PATH, "files/" + team1 + ".mp3"),
+                        os.path.join(PATH, "files/versus.mp3"),
+                        os.path.join(PATH, "files/" + team2 + ".mp3"),
+                        os.path.join(PATH, "files/field_3.mp3")])
 
         unmute()
         return 0
@@ -181,7 +181,7 @@ def main(now=None):
     if slot is not None:
         mute()
         print("Matches start in 5min")
-        play_sound([os.path.join(PATH, "files/MatchsStartIn5_en.mp3")])
+        play_sound([os.path.join(PATH, "files/MatchsStartIn5.mp3")])
         unmute()
         return 0
     
@@ -217,7 +217,7 @@ def main(now=None):
     if slot is not None:
         mute()
         print("Matches over")
-        play_sound([os.path.join(PATH, "files/MatchsEnd_with_gameover.mp3")])
+        play_sound([os.path.join(PATH, "files/MatchsEnd.mp3")])
 
         unmute()
         return 0
@@ -230,7 +230,7 @@ def main(now=None):
 if len(sys.argv) > 3 and sys.argv[3] == "debug":
     try:
         # main()
-        # main(datetime(year, 5, 26, 8, 50))
+        main(datetime(year, 5, 26, 8, 50))
         # main(datetime(year, 5, 26, 9, 50))
         # main(datetime(year, 5, 25, 8, 50))
         main(datetime(year, 5, 25, 8, 55))
@@ -238,6 +238,7 @@ if len(sys.argv) > 3 and sys.argv[3] == "debug":
         main(datetime(year, 5, 25, 9, 22))
         main(datetime(year, 5, 25, 9, 40))
         main(datetime(year, 5, 25, 9, 45))
+        main(datetime(year, 5, 25, 9, 50))
     except KeyboardInterrupt:
         unmute()
 
