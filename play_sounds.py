@@ -189,7 +189,7 @@ def main(now=None):
         return 0
 
     # 22min after the start, halftime
-    slot = find_slot(slots, now - deltat(22))
+    slot = find_slot(slots, now - deltat(23))
     if slot is not None:
         mute()
         print("Halftime")
@@ -224,13 +224,13 @@ def main(now=None):
 if len(sys.argv) > 3 and sys.argv[3] == "debug":
     try:
         # main()
-        main(datetime(year, 5, 26, 8, 50))
-        main(datetime(year, 5, 26, 9, 50))
-        main(datetime(year, 5, 25, 8, 50))
-        main(datetime(year, 5, 25, 9, 50))
+        # main(datetime(year, 5, 26, 8, 50))
+        # main(datetime(year, 5, 26, 9, 50))
+        # main(datetime(year, 5, 25, 8, 50))
+        # main(datetime(year, 5, 25, 9, 50))
         main(datetime(year, 5, 25, 8, 55))
         main(datetime(year, 5, 25, 9, 0))
-        main(datetime(year, 5, 25, 9, 22))
+        main(datetime(year, 5, 25, 9, 23))
         main(datetime(year, 5, 25, 9, 40))
         main(datetime(year, 5, 25, 9, 45))
         main(datetime(year, 5, 25, 9, 50))
