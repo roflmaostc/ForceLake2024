@@ -145,7 +145,8 @@ def main(now=None):
             team1 = matches[slot][0].lower()
             team2 = matches[slot][1].lower()
             print("Match : ", team1, " vs ", team2)
-            play_sound([os.path.join(PATH, "files/" + team1 + ".mp3"),
+            play_sound([os.path.join(PATH, "files/JingleStartAlienSound.mp3"),
+                        os.path.join(PATH, "files/" + team1 + ".mp3"),
                         os.path.join(PATH, "files/versus.mp3"),
                         os.path.join(PATH, "files/" + team2 + ".mp3"),
                         os.path.join(PATH, "files/field_1.mp3")])
@@ -153,7 +154,8 @@ def main(now=None):
             team1 = matches[slot][2].lower()
             team2 = matches[slot][3].lower()
             print("Match : ", team1, " vs ", team2)
-            play_sound([os.path.join(PATH, "files/" + team1 + ".mp3"),
+            play_sound([os.path.join(PATH, "files/JingleStartAlienSound.mp3"),
+                        os.path.join(PATH, "files/" + team1 + ".mp3"),
                         os.path.join(PATH, "files/versus.mp3"),
                         os.path.join(PATH, "files/" + team2 + ".mp3"),
                         os.path.join(PATH, "files/field_2.mp3")])
@@ -161,7 +163,8 @@ def main(now=None):
             team1 = matches[slot][4].lower()
             team2 = matches[slot][5].lower()
             print("Match : ", team1, " vs ", team2)
-            play_sound([os.path.join(PATH, "files/" + team1 + ".mp3"),
+            play_sound([os.path.join(PATH, "files/JingleStartAlienSound.mp3"),
+                        os.path.join(PATH, "files/" + team1 + ".mp3"),
                         os.path.join(PATH, "files/versus.mp3"),
                         os.path.join(PATH, "files/" + team2 + ".mp3"),
                         os.path.join(PATH, "files/field_3.mp3")])
@@ -224,8 +227,8 @@ def main(now=None):
 if len(sys.argv) > 3 and sys.argv[3] == "debug":
     try:
         # main()
-        # main(datetime(year, 5, 26, 8, 50))
-        # main(datetime(year, 5, 26, 9, 50))
+        main(datetime(year, 5, 26, 8, 50))
+        main(datetime(year, 5, 26, 9, 50))
         # main(datetime(year, 5, 25, 8, 50))
         # main(datetime(year, 5, 25, 9, 50))
         main(datetime(year, 5, 25, 8, 55))
